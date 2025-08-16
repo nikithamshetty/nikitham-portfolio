@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nikitha M — Portfolio</title>
+  <meta name="description" content="Portfolio of Nikitha M — fresher front-end developer and UI/UX enthusiast." />
+  <meta name="theme-color" content="#0b0f19" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================== THEME TOKENS ================== */
+    :root{
+      --bg:#0b0f19;           /* dark */
+      --panel:#0f1526;
+      --text:#e6e9f2;
+      --muted:#9aa2b1;
+      --border:rgba(255,255,255,.08);
+      --brand:#7c5cff;
+      --brand-2:#28d0b3;
+      --chip:#151c30;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    :root[data-theme="light"]{
+      --bg:#f7f9fc;          /* light */
+      --panel:#ffffff;
+      --text:#0b0f19;
+      --muted:#5a6575;
+      --border:rgba(0,0,0,.08);
+      --chip:#eff2f7;
+    }
+
+    /* ================== BASE ================== */
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:var(--bg); color:var(--text); line-height:1.6;
+      transition: background .3s ease, color .3s ease;
+    }
+    .container{width:min(1100px,92%); margin:0 auto}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* ================== HEADER ================== */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      background:color-mix(in lab, var(--bg), transparent 20%);
+      backdrop-filter:saturate(160%) blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center;
+      padding:12px 0;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .logo{display:inline-grid; place-items:center; width:22px; height:22px; border-radius:7px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; box-shadow:var(--shadow)}
+    .nav{justify-self:center}
+    .menu{display:flex; gap:16px; list-style:none; margin:0; padding:0}
+    .menu a{opacity:.85; font-weight:500}
+    .menu a:hover,.menu a.active{opacity:1}
+    .nav-toggle{display:none}
+    #themeToggle{
+      border:1px solid var(--border); background:var(--panel); color:var(--text);
+      padding:8px 10px; border-radius:10px; cursor:pointer;
+    }
+
+    /* ================== HERO ================== */
+    .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; padding:54px 0 18px}
+    .headline{font-size:clamp(28px,5vw,44px); line-height:1.12; margin:0 0 10px}
+    .lead{color:var(--muted); margin:0 0 14px}
+    .meta{display:flex; gap:16px; flex-wrap:wrap; color:var(--muted); font-size:14px}
+    .cta{display:flex; gap:12px; margin-top:16px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:var(--panel);
+      font-weight:600; transition:transform .12s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); border-color:transparent; color:#0b0f19}
+    .card{
+      background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:var(--shadow)
+    }
+    .badge{display:inline-block; background:var(--chip); border:1px solid var(--border); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted)}
+
+    /* ================== SECTIONS ================== */
+    .section{padding:38px 0}
+    .section h2{font-size:26px; margin:0 0 14px}
+    .chips{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{background:var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius:999px; font-weight:600; font-size:14px}
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:18px}
+    .project .title{margin:0 0 6px; font-weight:700}
+    .muted{color:var(--muted)}
+
+    .timeline{list-style:none; padding:0; margin:0}
+    .timeline li{margin:10px 0 0 0; padding-left:16px; position:relative}
+    .timeline li::before{content:""; position:absolute; left:0; top:.6em; width:8px; height:8px; border-radius:50%; background:var(--brand)}
+
+    .contact-form{max-width:720px}
+    .field{display:flex; flex-direction:column; gap:8px; margin-bottom:12px}
+    input, textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border);
+      background:var(--panel); color:var(--text);
+    }
+    input::placeholder, textarea::placeholder{color:var(--muted)}
+
+    /* ================== FOOTER ================== */
+    .site-footer{border-top:1px solid var(--border); padding:20px 0; text-align:center; color:var(--muted); margin-top:30px}
+
+    /* ================== REVEAL ANIMATIONS ================== */
+    .reveal{opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.in{opacity:1; transform:none}
+
+    /* ================== RESPONSIVE ================== */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .nav-toggle{display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--border); background:var(--panel); color:var(--text); padding:8px 10px; border-radius:10px; cursor:pointer}
+      .menu{display:none; position:absolute; right:1rem; top:60px; background:var(--panel); border:1px solid var(--border); padding:10px; border-radius:12px; box-shadow:var(--shadow); flex-direction:column}
+      .menu.open{display:flex}
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#"><span class="logo">N</span><span>Nikitha M</span></a>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu">Menu</button>
+        <ul id="menu" class="menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero container">
+      <div>
+        <h1 class="headline">Hi, I'm Nikitha 👋</h1>
+        <p class="lead">Aspiring Software Developer with strong fundamentals and a passion for clean UX.</p>
+        <div class="meta">
+          <span>📍 India</span>
+          <span>✉️ <a href="mailto:nikithamshetty13@gmail.com">nikithamshetty13@gmail.com</a></span>
+          <span>📞 <a href="tel:+916361859386">+91 6361859386</a></span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="assets/NikithaM_Resume.pdf" download>Download Resume</a>
+        </div>
+      </div>
+
+      <aside class="card">
+        <span class="badge">Open to Work</span>
+        <h2 style="margin:10px 0 6px">Fresher • Front-end / UI-UX</h2>
+        <p class="muted" style="margin:0">Quick learner, team player, and comfortable in challenging environments.</p>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section container reveal">
+      <h2>About</h2>
+      <p>I'm a fresher with a keen eye for design and a builder's mindset. I enjoy translating user problems into simple, accessible interfaces that feel fast and friendly.</p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section container reveal">
+      <h2>Skills</h2>
+      <div class="chips">
+        <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+        <span class="chip">Java</span><span class="chip">C</span><span class="chip">C++</span>
+        <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">UI/UX</span>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section container reveal">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card project">
+          <h3 class="title">Municipality Waste Disposal Automation</h3>
+          <p class="muted">A smart city solution that automates waste collection to improve cleanliness. <strong>Role:</strong> UI/UX & Front-end.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section container reveal">
+      <h2>Education</h2>
+      <ul class="timeline">
+        <li><strong>MCA (pursuing)</strong> — Dayananda Sagar Academy of Technology and Management</li>
+        <li><strong>BCA</strong> — PES Institute of Advanced Management Studies <span class="muted">(68.08%)</span></li>
+      </ul>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section container reveal">
+      <h2>Achievements & Certifications</h2>
+      <ul class="timeline">
+        <li>Completed “Practical Web Development: 22 Courses in 1”</li>
+        <li>Completed “The Complete 2024 Web Development Bootcamp”</li>
+        <li>Participated in inter-college technical events</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container reveal">
+      <h2>Contact</h2>
+      <form class="contact-form" name="contact">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" required />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button class="btn primary" type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="year"></span> Nikitha M. Built with ❤️
+    </div>
+  </footer>
+
+  <script>
+    // ===== Theme (persistent) =====
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'light'){ root.setAttribute('data-theme','light'); themeBtn.textContent='🌞'; }
+    themeBtn.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      localStorage.setItem('theme', isLight ? 'dark' : 'light');
+      themeBtn.textContent = isLight ? '🌙' : '🌞';
+    });
+
+    // ===== Mobile nav =====
+    const navBtn = document.getElementById('navToggle');
+    const menu = document.getElementById('menu');
+    navBtn?.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      navBtn.setAttribute('aria-expanded', String(open));
+    });
+
+    // ===== Active link highlight on scroll =====
+    const sections = [...document.querySelectorAll('section[id]')];
+    const links = [...document.querySelectorAll('.menu a')];
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, {rootMargin: "-40% 0px -55% 0px", threshold: 0.01});
+    sections.forEach(s => io.observe(s));
+
+    // ===== Reveal on scroll =====
+    const revealEls = document.querySelectorAll('.reveal');
+    const rio = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); rio.unobserve(en.target); } });
+    }, {threshold: 0.1});
+    revealEls.forEach(el => rio.observe(el));
+
+    // ===== Footer year =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
